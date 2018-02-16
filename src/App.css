@@ -27,7 +27,6 @@
 
 .TarotCardDescription {
 
-	width: 200px;
 	animation-duration: 5s;
 	animation-name: fadeInSudden;
 	margin-left: auto;
@@ -51,6 +50,7 @@
 }
 
 .TarotCardContainer{
+	width: 350px;
 	margin-left: 30px;
 	margin-right: 30px;
 	display: flex;
