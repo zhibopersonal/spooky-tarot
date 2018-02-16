@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 const tarot_card_data = require('./data/tarot_card_assets');
+const chaos_words = require('./data/chaos_words');
 
 var replace_text_random = function(orig_text, replace_word_list, pct_replace){
 	var orig_text_array = orig_text.split(' ')
@@ -57,7 +58,7 @@ class App extends Component {
     return (
 		<div>
 			<TarotCard image_path = {'./imgs/' + tarot_card_data[randomCardIndex].image_path} />
-			<TarotCardDescription card_description = {replace_text_random(tarot_card_data[randomCardIndex].description, ['farts'], 0.5)} />
+			<TarotCardDescription card_description = {replace_text_random(tarot_card_data[randomCardIndex].description, chaos_words, 0.1)} />
 		</div>
     );
   }

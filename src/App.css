@@ -29,11 +29,27 @@
 .TarotCardDescription {
 	display: block;
 	width: 200px;
+	animation-duration: 5s;
+	animation-name: fadeInSudden;
 }
 
 .TarotCard img{
 	height: 300px;
 	width: 200px;
+	animation-duration: 5s;
+	animation-name: fadeInGradual;
+}
+
+
+@keyframes fadeInGradual {
+   0% {opacity: 0;}
+   100% {opacity: 1;}
+}
+
+@keyframes fadeInSudden {
+   0% {opacity: 0;}
+   99% {opacity: 0;}
+   100% {opacity: 1;}
 }
 
 
