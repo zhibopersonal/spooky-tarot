@@ -22,15 +22,21 @@ var replace_text_random = function(orig_text, replace_word_list, pct_replace){
 
 }
 
-class TarotCard extends Component {
+
+
+class TarotCardImage extends Component {
 	constructor(props){
 		super(props)
-		console.log(this.props)
 	}
 
 	render() {
+		var classText = "TarotCardImage"
+		if (this.props.orientation == 0) {
+			classText += " Rotated"
+		}
+
 		return (
-			<div className="TarotCard">
+			<div className={classText}>
 				<img src = {this.props.image_path}></img>
 			</div>
 		)
@@ -51,14 +57,31 @@ class TarotCardDescription extends Component {
 	}
 }
 
+
+class TarotCardContainer extends Component
+{
+	render() {
+		return (
+			<div className="TarotCardContainer">
+				<div className="TarotCardTitle">{this.props.cardTitle}</div>
+				<TarotCardImage orientation = {this.props.orientation} image_path = {this.props.image_path} />
+				<TarotCardDescription card_description = {this.props.card_description} />
+			</div>
+		)
+	}
+}
+
 class App extends Component {
 
   	render() {
-		var randomCardIndex = Math.floor(Math.random() * tarot_card_data.length)
+		var randomCardIndex1 = Math.floor(Math.random() * tarot_card_data.length)
+		var randomCardIndex2 = Math.floor(Math.random() * tarot_card_data.length)
+		var randomCardIndex3 = Math.floor(Math.random() * tarot_card_data.length)
     return (
-		<div>
-			<TarotCard image_path = {'./imgs/' + tarot_card_data[randomCardIndex].image_path} />
-			<TarotCardDescription card_description = {replace_text_random(tarot_card_data[randomCardIndex].description, chaos_words, 0.1)} />
+		<div class="App">
+			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Past" image_path = {'./imgs/' + tarot_card_data[randomCardIndex1].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex1].description, chaos_words, 0.1)}/>
+			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Present" image_path = {'./imgs/' + tarot_card_data[randomCardIndex2].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex2].description, chaos_words, 0.1)}/>
+			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Future" image_path = {'./imgs/' + tarot_card_data[randomCardIndex3].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex3].description, chaos_words, 0.1)}/>
 		</div>
     );
   }

@@ -4,7 +4,8 @@ var chaos_words = [
 	"dicks",
 	"poop",
 	"poops on",
-	"fart-mcfarty-face"
+	"fart-mcfarty-face",
+	"dingus"
 ]
 
 module.exports = chaos_words
