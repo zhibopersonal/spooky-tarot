@@ -2,6 +2,7 @@
   text-align: center;
   display:flex;
   justify-content: center;
+  width: 100%;
 }
 
 .App-logo {
@@ -34,8 +35,8 @@
 }
 
 .TarotCardImage > img {
-	height: 450px;
-	width: 300px;
+	height: auto;
+	width: 100%;
 	animation-duration: 5s;
 	animation-name: fadeInGradual;
 }
@@ -47,12 +48,15 @@
 
 .TarotCardImage {
 	display: inline-block;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .TarotCardContainer{
-	width: 350px;
-	margin-left: 30px;
-	margin-right: 30px;
+	width: 28%;
+	margin-left: auto;
+	margin-right: auto;
 	display: flex;
 	flex-direction: column;
 }
