@@ -37,6 +37,7 @@
 .TarotCardImage > img {
 	height: auto;
 	width: 100%;
+	max-width: 300px;
 	animation-duration: 5s;
 	animation-name: fadeInGradual;
 }
