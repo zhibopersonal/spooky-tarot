@@ -4,19 +4,27 @@ var word_map = {
 		"butt crack",
 		"dick",
 		"poop",
-		"dingus"
+		"dingus",
+		"pee",
+		"butt",
+		"noun",
+		"boob",
+		"hepatits"
 	],
 	"NNS":[
 		"farts",
 		"butt cracks",
 		"dicks",
 		"poops",
-		"dinguses"
+		"dinguses",
+		"butts",
+		"boobs"
 	],
 	"VB":[
 		"fuck",
 		"cum",
-		"diddle"
+		"diddle",
+		"tickle"
 	],
 	"VBD":[
 		"fucked",

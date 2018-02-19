@@ -14,9 +14,6 @@ var replace_text_random = function(orig_text, replace_word_list, pct_replace){
 	var taggedWordsArray = posTagger.tag(wordsArray);
 	console.log(taggedWordsArray)
 
-
-
-
 	var orig_text_array = orig_text.split(' ')
 	var i
 	var orig_text_rand_index
@@ -69,7 +66,7 @@ class TarotCardDescription extends Component {
 	render() {
 		return (
 			<div className="TarotCardDescription">
-				{this.props.card_description}>
+				{this.props.card_description}
 			</div>
 		)
 	}
