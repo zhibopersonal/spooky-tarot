@@ -64,10 +64,13 @@ class TarotCardDescription extends Component {
 	}
 
 	render() {
+		var card_description_array = this.props.card_description.split('@@br@@')
+		var card_description_paragraphs = card_description_array.map(function(elem){
+			return <p> {elem} </p>
+		})
+		console.log(card_description_paragraphs)
 		return (
-			<div className="TarotCardDescription">
-				{this.props.card_description}
-			</div>
+			card_description_paragraphs
 		)
 	}
 }
@@ -77,28 +80,85 @@ class TarotCardContainer extends Component
 {
 	render() {
 		return (
-			<div className="TarotCardContainer">
+			<div className="TarotCardContainer" onClick={this.props.handleClick} >
 				<div className="TarotCardTitle">{this.props.cardTitle}</div>
 				<TarotCardImage orientation = {this.props.orientation} image_path = {this.props.image_path} />
-				<TarotCardDescription card_description = {this.props.card_description} />
 			</div>
 		)
 	}
 }
 
 class App extends Component {
+	handleCardClick(cardKey){
+		console.log("asdfasfd")
+		this.setState({cur_card_description: this.state.card_metadata[cardKey].card_description})
+	}
+
+	constructor(props){
+		super(props)
+
+		var card_metadata = {
+			"past": {
+				orientation: Math.floor(Math.random() * 2),
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+			},
+			"present": {
+				orientation: Math.floor(Math.random() * 2),
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+			},
+			"future": {
+				orientation: Math.floor(Math.random() * 2),
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+			}
+		}
+
+		for (var key in card_metadata){
+			card_metadata[key].card_description = replace_text_random(tarot_card_data[card_metadata[key].cardIndex].description, chaos_words.word_map, replace_pct)
+		}
+
+		this.state = {
+			cur_card_description: 'asdfasfdsa',
+			card_metadata: card_metadata
+		}
+	}
+
+
 
   	render() {
-		var randomCardIndex1 = Math.floor(Math.random() * tarot_card_data.length)
-		var randomCardIndex2 = Math.floor(Math.random() * tarot_card_data.length)
-		var randomCardIndex3 = Math.floor(Math.random() * tarot_card_data.length)
-    return (
-		<div class="App">
-			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Past" image_path = {'./imgs/' + tarot_card_data[randomCardIndex1].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex1].description, chaos_words.word_map, replace_pct)}/>
-			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Present" image_path = {'./imgs/' + tarot_card_data[randomCardIndex2].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex2].description, chaos_words.word_map, replace_pct)}/>
-			<TarotCardContainer orientation = {Math.floor(Math.random() * 2)} cardTitle = "Future" image_path = {'./imgs/' + tarot_card_data[randomCardIndex3].image_path} card_description = {replace_text_random(tarot_card_data[randomCardIndex3].description, chaos_words.word_map, replace_pct)}/>
+
+		return (
+		<div className="App">
+			<div className="AllCardContainer">
+				<TarotCardContainer
+					key= "past"
+					orientation = {this.state.card_metadata.past.orientation}
+					cardTitle = "Past"
+					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.past.cardIndex].image_path}
+					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.past.cardIndex].description, chaos_words.word_map, replace_pct)}
+					handleClick = {() => this.handleCardClick('past')}
+				/>
+				<TarotCardContainer
+					key= "present"
+					orientation = {this.state.card_metadata.present.orientation}
+					cardTitle = "Present"
+					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.present.cardIndex].image_path}
+					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.present.cardIndex].description, chaos_words.word_map, replace_pct)}
+					handleClick = {() => this.handleCardClick('present')}
+				/>
+				<TarotCardContainer
+					key= "future"
+					orientation = {this.state.card_metadata.future.orientation}
+					cardTitle = "Future"
+					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.future.cardIndex].image_path}
+					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.future.cardIndex].description, chaos_words.word_map, replace_pct)}
+					handleClick = {() => this.handleCardClick('future')}
+				/>
+			</div>
+			<div className="TarotCardDescription">
+				<TarotCardDescription card_description = {this.state.cur_card_description} />
+			</div>
 		</div>
-    );
+    )
   }
 }
 
