@@ -4,7 +4,7 @@ import './App.css';
 import AnimateOnChange from 'react-animate-on-change'
 const tarot_card_data = require('./data/tarot_card_assets');
 const chaos_words = require('./data/chaos_words');
-const replace_pct = 0.1
+const replace_pct = 0.4
 const card_back_image = './imgs/card-back.png'
 
 var pos = require('pos');
