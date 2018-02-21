@@ -153,7 +153,7 @@ class App extends Component {
 		}
 
 		this.state = {
-			cur_card_description: 'asdfasfdsa',
+			cur_card_description: 'Click on a card to see your reading',
 			card_metadata: card_metadata
 		}
 	}
