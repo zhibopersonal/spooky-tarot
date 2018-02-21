@@ -28,16 +28,24 @@
 
 
 .TarotCardDescription {
-
-	animation-duration: 3s;
-	animation-name: fadeInSudden;
+  position:relative;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
 	width: 80%;
 }
 
-.TarotCardImage > img {
+.TarotCardDescription.fadeIn {
+	animation-duration: 1s;
+	animation-name: fadeInGradual;
+}
+
+.TarotCardImage {
+  display: inline-block;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
 	height: auto;
 	width: 100%;
 	max-width: 300px;
@@ -45,23 +53,17 @@
 	animation-name: fadeInGradual;
 }
 
-.TarotCardImage.Rotated > img {
+.TarotCardImage img.Rotated {
 	transform: rotate(180deg);
 }
 
-
-.TarotCardImage {
-	display: inline-block;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
 
 .AllCardContainer {
 	width:100%;
 	display: flex;
 	flex-direction: row;
 }
+
 
 .TarotCardContainer{
 	width: 28%;
@@ -72,15 +74,57 @@
 }
 
 
+
+
+
+.RotationContainer {
+  perspective: 2000px;
+}
+
+#flip-card {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: transform 3s;
+
+}
+
+
+#flip-card.flipped {
+  transform: rotateY( 180deg );
+}
+
+#flip-card div {
+  backface-visibility: hidden;
+  position: absolute;
+}
+
+#flip-card img {
+  height: 36vw;
+  width: 24vw;
+  position: absolute;
+}
+
+#flip-card-spacer {
+  position: relative;
+  height: 36vw;
+}
+
+#flip-card .front {
+  transform: rotateY( 0deg );
+  position: absolute;
+}
+
+#flip-card .back {
+  transform: rotateY( 180deg );
+  position: absolute;
+}
+
+
 @keyframes fadeInGradual {
    0% {opacity: 0;}
    100% {opacity: 1;}
 }
 
-@keyframes fadeInSudden {
-   0% {opacity: 0;}
-   100% {opacity: 1;}
-}
 
 
 @keyframes App-logo-spin {

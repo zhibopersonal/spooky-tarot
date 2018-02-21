@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import AnimateOnChange from 'react-animate-on-change'
 const tarot_card_data = require('./data/tarot_card_assets');
 const chaos_words = require('./data/chaos_words');
 const replace_pct = 0.1
+const card_back_image = './imgs/card-back.png'
 
 var pos = require('pos');
 var posTagger = new pos.Tagger();
@@ -44,16 +46,32 @@ class TarotCardImage extends Component {
 		super(props)
 	}
 
+
 	render() {
+		console.log(this.props.flipped)
+
 		var classText = "TarotCardImage"
-		if (this.props.orientation == 0) {
-			classText += " Rotated"
-		}
+		//if (this.props.orientation == 0) {
+		//	classText += " Rotated"
+		//}
 
 		return (
 			<div className={classText}>
-				<img src = {this.props.image_path}></img>
+				<div className="RotationContainer">
+
+				  <div id="flip-card" className={(this.props.flipped ? 'flipped' : '')}>
+				    <div className="front">
+							<img src = {card_back_image} className = {this.props.orientation === 0 ? 'Rotated': ''}></img>
+						</div>
+				    <div className="back">
+							<img src = {this.props.image_path} className = {this.props.orientation === 0 ? 'Rotated': ''}></img>
+						</div>
+				  </div>
+
+					<div id="flip-card-spacer"></div>
+				</div>
 			</div>
+
 		)
 	}
 }
@@ -79,19 +97,34 @@ class TarotCardDescription extends Component {
 class TarotCardContainer extends Component
 {
 	render() {
+
 		return (
 			<div className="TarotCardContainer" onClick={this.props.handleClick} >
 				<div className="TarotCardTitle">{this.props.cardTitle}</div>
-				<TarotCardImage orientation = {this.props.orientation} image_path = {this.props.image_path} />
+				<TarotCardImage
+					orientation = {this.props.orientation}
+					image_path = {this.props.image_path}
+					flipped = {this.props.flipped}
+				/>
 			</div>
 		)
 	}
 }
 
+
 class App extends Component {
 	handleCardClick(cardKey){
 		console.log("asdfasfd")
-		this.setState({cur_card_description: this.state.card_metadata[cardKey].card_description})
+		var new_state = {
+			cur_card_description: this.state.card_metadata[cardKey].card_description
+		}
+
+		if (!(this.state.card_metadata[cardKey].flipped)){
+			new_state.card_metadata = this.state.card_metadata
+			this.state.card_metadata[cardKey].flipped = true
+		}
+
+		this.setState(new_state)
 	}
 
 	constructor(props){
@@ -100,15 +133,18 @@ class App extends Component {
 		var card_metadata = {
 			"past": {
 				orientation: Math.floor(Math.random() * 2),
-				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length),
+				flipped: false
 			},
 			"present": {
 				orientation: Math.floor(Math.random() * 2),
-				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length),
+				flipped: false
 			},
 			"future": {
 				orientation: Math.floor(Math.random() * 2),
-				cardIndex: Math.floor(Math.random() * tarot_card_data.length)
+				cardIndex: Math.floor(Math.random() * tarot_card_data.length),
+				flipped: false
 			}
 		}
 
@@ -135,6 +171,7 @@ class App extends Component {
 					cardTitle = "Past"
 					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.past.cardIndex].image_path}
 					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.past.cardIndex].description, chaos_words.word_map, replace_pct)}
+					flipped = {this.state.card_metadata.past.flipped}
 					handleClick = {() => this.handleCardClick('past')}
 				/>
 				<TarotCardContainer
@@ -143,6 +180,7 @@ class App extends Component {
 					cardTitle = "Present"
 					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.present.cardIndex].image_path}
 					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.present.cardIndex].description, chaos_words.word_map, replace_pct)}
+					flipped = {this.state.card_metadata.present.flipped}
 					handleClick = {() => this.handleCardClick('present')}
 				/>
 				<TarotCardContainer
@@ -151,15 +189,21 @@ class App extends Component {
 					cardTitle = "Future"
 					image_path = {'./imgs/' + tarot_card_data[this.state.card_metadata.future.cardIndex].image_path}
 					card_description = {replace_text_random(tarot_card_data[this.state.card_metadata.future.cardIndex].description, chaos_words.word_map, replace_pct)}
+					flipped = {this.state.card_metadata.future.flipped}
 					handleClick = {() => this.handleCardClick('future')}
 				/>
 			</div>
-			<div className="TarotCardDescription">
-				<TarotCardDescription card_description = {this.state.cur_card_description} />
-			</div>
+			 <AnimateOnChange
+			 	baseClassName="TarotCardDescription"
+			 	animationClassName="fadeIn"
+			 	animate={true}>
+					<TarotCardDescription card_description = {this.state.cur_card_description} />
+			 </AnimateOnChange>
 		</div>
     )
   }
 }
+// <TarotCardDescription card_description = {this.state.cur_card_description} />
+
 
 export default App;
