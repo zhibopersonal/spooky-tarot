@@ -28,7 +28,7 @@ var replace_text_random = function(orig_text, replace_word_list, pct_replace){
 		orig_text_rand_index = Math.floor(Math.random() * taggedWordsArray.length)
 		curPOS = taggedWordsArray[orig_text_rand_index][1]
 
-		if (chaos_words.available_pos.includes(curPOS)){
+		if (chaos_words.available_pos.includes(curPOS) && !chaos_words.do_not_replace_words.includes(taggedWordsArray[orig_text_rand_index][0])){
 			replace_word_rand_index = Math.floor(Math.random() * replace_word_list[curPOS].length)
 			taggedWordsArray[orig_text_rand_index][0] = replace_word_list[curPOS][replace_word_rand_index]
 		}

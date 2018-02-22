@@ -8,12 +8,16 @@ body {
   display:flex;
   justify-content: center;
   flex-direction: column;
-  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  max-width: 80vh;
 }
 
 .DeckLayout {
   position: relative;
-  width: 80vw;
+  top: 5px;
+  width: 100%;
   height: auto;
   margin-left: auto;
   margin-right: auto;
@@ -35,12 +39,13 @@ body {
 
 .TarotCardDescription {
   position:relative;
-  top: 3vw;
+  top: 5px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: left;
-  font-size: 2vw;
-	width: 80%;
+  font-size: 3vw;
+	width: 100%;
+
 }
 
 .TarotCardDescription.fadeIn {
@@ -66,20 +71,19 @@ body {
 
 .TarotCardTitle {
   font-size: 3vw;
-  height: 9vw;
+  height: auto;
 }
 
 .IntroTitle {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  width: 80vw;
-  font-size: 3vw;
-  height: 9vw;
+  font-size: 2vw;
+  height: auto;
 }
 
 .AllCardContainer {
-	width: 90%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 	display: flex;
@@ -127,8 +131,8 @@ body {
 }
 
 #flip-card img {
-  height: 30vw;
-  width: 20vw;
+  height: auto;
+  width: 100%;
   left: 0px;
   border-color: #900;
   border-width: 3px;
@@ -137,7 +141,8 @@ body {
 
 #flip-card-spacer {
   position: relative;
-  height: 30vw;
+  height: 50vw;
+  max-height: 40vh;
 }
 
 #flip-card .front {

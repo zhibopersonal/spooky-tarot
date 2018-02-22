@@ -59,4 +59,9 @@ for (k in word_map){
 	available_pos.push(k)
 }
 
-module.exports = {word_map:word_map, available_pos:available_pos}
+var do_not_replace_words = [
+	'is','was','be','been',
+	'have','had','has'
+]
+
+module.exports = {word_map:word_map, available_pos:available_pos, do_not_replace_words:do_not_replace_words}
